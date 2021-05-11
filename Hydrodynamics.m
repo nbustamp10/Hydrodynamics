@@ -1,7 +1,7 @@
 clear all, clc, clear memory
 P1=0; P2=1; P3=0;
 %constantes
-g=9.81; rhom=1025; rhor=1000; rhoa=1.3; rhog=1.52; %gravedad,densidad del mar, densidad del r韔, densidad del aire, densidad del gas
+g=9.81; rhom=1025; rhor=1000; rhoa=1.3; rhog=1.52; %gravedad,densidad del mar, densidad del r铆o, densidad del aire, densidad del gas
 
 %% P1
 if P1==1
@@ -57,7 +57,7 @@ qb= 4/b; %Caudal por unidad de ancho
 H0=2;   %Nivel maximo del agua
 gr=g*(rhom-rhor)/rhor;
 
-%topograf韆
+%topograf铆a
 
 A=1;  %Amplitud del lecho
 L=9000; %periodo del lecho
@@ -129,11 +129,11 @@ rhom=1020;
 k=2*pi/(365*24*3600);   %
 v=@(t)(4+3*cos(k*(t-11*24*3600)));	%Viento
 td=@(t)(13+3*cos(k*(t-10*24*3600))); %Temperatura de rocio
-fu=@(v)(9.2+0.46*v.^2);               %Funci髇 del viento
+fu=@(v)(9.2+0.46*v.^2);               %Funci贸n del viento
 Tm=@(T,td)((T+td)/2);
 bc=@(Tm)(0.35+0.015*Tm+0.0012*Tm.^2);
 Ce=@(T,bc,fu)(4.5+0.05*T+(bc+0.47).*fu);
-Hws=@(t)(ri + ria*cos(k*((t + 11*24*3600)))); %Radiaci髇 solar incidente
+Hws=@(t)(ri + ria*cos(k*((t + 11*24*3600)))); %Radiaci贸n solar incidente
 Te=@(td,Hws,Ce)(td+Hws./Ce);
 Hn=@(Ce,Te,T,Hws)((Ce.*(Te-T))-Hws*exp(-b*h1));
 
@@ -146,11 +146,11 @@ for i=2:length(TT)
             t=i*dt;   
             v1=v(t);    
             td1=td(t);TD1(i)=td1;
-            fu1=fu(v1);  FV1(i)=fu1;              %Funci髇 del viento
+            fu1=fu(v1);  FV1(i)=fu1;              %Funci贸n del viento
             Tm1=Tm(T,td1);
             bc1=bc(Tm1);
             Ce1=Ce(T,bc1,fu1);
-            Hws1=Hws(t); HWS1(i)=Hws1;%Radiaci髇 solar de onda corta
+            Hws1=Hws(t); HWS1(i)=Hws1;%Radiaci贸n solar de onda corta
             Te1=Te(td1,Hws1,Ce1);
             Hn1=Hn(Ce1,Te1,T,Hws1);
             k1=dt*m(Hn1);
@@ -159,11 +159,11 @@ for i=2:length(TT)
             T2=T+0.5*k1;
             v2=v(tp);    
             td2=td(tp);
-            fu2=fu(v2);  FV2(i)=fu2;              %Funci髇 del viento
+            fu2=fu(v2);  FV2(i)=fu2;              %Funci贸n del viento
             Tm2=Tm(T2,td2);
             bc2=bc(Tm2);
             Ce2=Ce(T2,bc2,fu2);
-            Hws2=Hws(tp); %Radiaci髇 solar de onda corta
+            Hws2=Hws(tp); %Radiaci贸n solar de onda corta
             Te2=Te(td2,Hws2,Ce2);
             Hn2=Hn(Ce2,Te2,T2,Hws2);
             k2=dt*m(Hn2);
@@ -172,11 +172,11 @@ for i=2:length(TT)
             T3=T+0.5*k2;
             v3=v(tp);    
             td3=td(tp);
-            fu3=fu(v3); FV3(i)=fu3;              %Funci髇 del viento
+            fu3=fu(v3); FV3(i)=fu3;              %Funci贸n del viento
             Tm3=Tm(T3,td3);
             bc3=bc(Tm3);
             Ce3=Ce(T3,bc3,fu3);
-            Hws3=Hws(tp); %Radiaci髇 solar de onda corta
+            Hws3=Hws(tp); %Radiaci贸n solar de onda corta
             Te3=Te(td3,Hws3,Ce3);
             Hn3=Hn(Ce3,Te3,T3,Hws3);
             k3=dt*m(Hn3);
@@ -185,11 +185,11 @@ for i=2:length(TT)
             T4=T+k3;
             v4=v(tp);    
             td4=td(tp);
-            fu4=fu(v4); FV4(i)=fu4;               %Funci髇 del viento
+            fu4=fu(v4); FV4(i)=fu4;               %Funci贸n del viento
             Tm4=Tm(T4,td4);
             bc4=bc(Tm4);
             Ce4=Ce(T4,bc3,fu4);
-            Hws4=Hws(tp); %Radiaci髇 solar de onda corta
+            Hws4=Hws(tp); %Radiaci贸n solar de onda corta
             Te4=Te(td4,Hws4,Ce4);
             Hn4=Hn(Ce4,Te4,T4,Hws4);
             k4=dt*m(Hn4);
@@ -202,7 +202,7 @@ end
 break
 %Capa 2 
 
-Hws02=@(t)(ri + ria*cos(k*((t + 11*(24*3600))))); %Radiaci髇 solar incidente
+Hws02=@(t)(ri + ria*cos(k*((t + 11*(24*3600))))); %Radiaci贸n solar incidente
 Area=1;
 alfa=30;
 theta=0.7;
@@ -223,7 +223,7 @@ end
 figure
 subplot(3,1,1)
   plot(time,T_1) 
-  xlabel('Tiempo (d韆s)')
+  xlabel('Tiempo (d铆as)')
   ylabel('Temperatura (^\circC)')
   legend ('Temperatura capa 1')  
 subplot(3,1,2)  
@@ -231,12 +231,12 @@ subplot(3,1,2)
   hold on
 %   plot(time,T_alm, 'b')
   plot(time,T_21,'k')
-  xlabel('Tiempo (d韆s)')
+  xlabel('Tiempo (d铆as)')
   ylabel('Temperatura (^\circC)')
   legend ('Temperatura capa 2','Intercambiador de calor')  
 subplot(3,1,3)  
   plot(time,T_21,'k')
-    xlabel('Tiempo (d韆s)')
+    xlabel('Tiempo (d铆as)')
   ylabel('Temperatura (^\circC)')
   legend ('Intercambiador de calor')  
 end
